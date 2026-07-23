@@ -208,6 +208,17 @@ class ReadActivity(activity.Activity):
     def __init__(self, handle):
         super().__init__(handle)
 
+        # Load local CSS for PapersView and activity-specific styling
+        css_provider = Gtk.CssProvider()
+        css_path = os.path.join(activity.get_bundle_path(), "activity.css")
+        if os.path.exists(css_path):
+            css_provider.load_from_path(css_path)
+            Gtk.StyleContext.add_provider_for_display(
+                Gdk.Display.get_default(),
+                css_provider,
+                Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION
+            )
+
         self.max_participants = 1
         self._document = None
         self._fileserver = None
