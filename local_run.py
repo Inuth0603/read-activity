@@ -14,6 +14,11 @@ from gi.repository import Gtk, Gdk
 
 gi.require_foreign("cairo")
 
+import dbus.mainloop.glib
+dbus.mainloop.glib.DBusGMainLoop(set_as_default=True)
+
+# Force the Sugar GTK theme so icons and CSS render correctly in standalone mode
+os.environ.setdefault("GTK_THEME", "Sugar")
 # Set up standalone environment
 os.environ.setdefault("SUGAR_BUNDLE_ID", "org.laptop.sugar.ReadActivity")
 os.environ.setdefault("SUGAR_BUNDLE_NAME", "Read")
@@ -42,6 +47,10 @@ def main():
                 css_provider,
                 Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION
             )
+            
+        settings = Gtk.Settings.get_default()
+        settings.set_property("gtk-icon-theme-name", "Sugar")
+        settings.set_property("gtk-theme-name", "Sugar")
 
         handle = ActivityHandle(
             activity_id="read-local",

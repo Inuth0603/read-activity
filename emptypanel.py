@@ -6,7 +6,7 @@ from sugar4.graphics.icon import Icon
 
 def show(activity, icon_name, message, btn_label, btn_callback):
     empty_widgets = Gtk.Box(orientation=Gtk.Orientation.VERTICAL)
-    empty_widgets.add_css_class("bg-white")
+    empty_widgets.add_css_class("background-white")
 
     vbox = Gtk.Box(orientation=Gtk.Orientation.VERTICAL)
     mvbox = Gtk.Box(orientation=Gtk.Orientation.VERTICAL)
